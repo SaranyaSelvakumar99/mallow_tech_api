@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Billing Page</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Billing Page</h1>
+
+    <h2>Customer Email</h2>
+    <p>{{ data.billing_product.0.email }}</p>
+
+    <h2>Bill Section</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Unit Price</th>
+                <th>Quantity</th>
+                <th>Purchase Price</th>
+                <th>Tax % for Item</th>
+                <th>Tax Payable for Item</th>
+                <th>Total Price of the Item * Quantity</th>
+                <th>Total Price + Total tax</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for billing in data.billing_product %}
+                {% for item in billing.purchased_products %}
+                    <tr>
+                        <td>{{ item.product }}</td>
+                        <td>{{ item.unit_price }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.purchase_price }}</td>
+                        <td>{{ item.tax_percentage }}</td>
+                        <td>{{ item.tax_payable_item }}</td>
+                        <td>{{ item.total_item_price }}</td>
+                        <td>{{ item.total_price_with_tax_}}</td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Summary</h2>
+    <p>Total price without tax: {{ data.billing_product.0.total_price_without_tax }}</p>
+    <p>Total tax payable: {{ data.billing_product.0.total_tax_payable }}</p>
+    <p>Net price of the purchased items: {{ data.billing_product.0.net_price_purchased_item }}</p>
+    <p>Rounded down value of the purchased items net price: {{ data.billing_product.0.round_price_purchased_item }}</p>
+    <p>Balance payable to the customer: {{ data.billing_product.0.balance_payable_to_user }}</p>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!-- billing/templates/billing/billing.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing Page</title>
+    <script>
+        function addProductField() {
+            const container = document.getElementById('products-container');
+            const productField = `
+                <div class="product-item">
+                    <input type="text" name="product_id" placeholder="Product ID">
+                    <input type="number" name="quantity" placeholder="Quantity">
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', productField);
+        }
+    </script>
+    <style>
+        .item {
+            margin-bottom: 10px; /* Adjust the value as needed */
+        }
+    </style>
+    <style>
+        .section {
+            margin-bottom: 10px; /* Adjust the value as needed */
+        }
+    </style>
+    <style>
+        .product-item {
+            margin-bottom: 10px; /* Adjust the value as needed */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Billing Page</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="section">
+                <label for="email">Customer Email</label>
+                <input type="email" id="email" name="email" placeholder="Email ID">
+            </div>
+            <div class="section">
+                <h2>Bill section</h2>
+                <div id="products-container">
+                    <div class="product-item">
+                        <input type="text" name="product_id" placeholder="Product ID">
+                        <input type="number" name="quantity" placeholder="Quantity">
+                    </div>
+                </div>
+                <button type="button" onclick="addProductField()">Add New</button>
+            </div>
+            <div class="section denominations">
+                <h2>Denominations</h2>
+                <div class="item">
+                    <label for="count_500">500</label>
+                    <input type="number" id="count_500" name="count_500" placeholder="Count" value="0">
+                </div>
+                
+                <div class="item">
+                    <label for="count_50">50</label>
+                    <input type="number" id="count_50" name="count_50" placeholder="Count" value="0">
+                </div>
+                <div class="item">
+                    <label for="count_20">20</label>
+                    <input type="number" id="count_20" name="count_20" placeholder="Count" value="0">
+                </div>
+                <div class="item">
+                    <label for="count_10">10</label>
+                    <input type="number" id="count_10" name="count_10" placeholder="Count" value="0">
+                </div>
+                <div class="item">
+                    <label for="count_5">5</label>
+                    <input type="number" id="count_5" name="count_5" placeholder="Count" value="0">
+                </div>
+                <div class="item">
+                    <label for="count_2">2</label>
+                    <input type="number" id="count_2" name="count_2" placeholder="Count" value="0">
+                </div>
+                <div class="item">
+                    <label for="count_1">1</label>
+                    <input type="number" id="count_1" name="count_1" placeholder="Count" value="0">
+                </div>
+            </div>
+            <div class="section">
+                <label for="user_paid_cash">Cash paid by customer</label>
+                <input type="number" id="user_paid_cash" name="user_paid_cash" placeholder="Amount">
+            </div>
+            <div class="buttons">
+                <button type="reset">Cancel</button>
+                <button type="submit">Generate Bill</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
