@@ -10,7 +10,7 @@ from django.shortcuts import render
 import json
 from django.http import JsonResponse
 from utils.helper import send_custom_mail, sum_of_denomination
-
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 class UserBillingAPIView(APIView):
     def get(self, request):
@@ -117,7 +117,6 @@ class UserBillingAPIView(APIView):
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
             
 # ----template view functions------------
-from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def generate_bill(request):
     if request.method == 'POST':
